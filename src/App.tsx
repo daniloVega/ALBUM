@@ -1,35 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Route, Router, Routes } from 'react-router-dom';
+import RegistrationForm from './pages/auth/registration/Registration';
+import LoginForm from './pages/auth/login/Login';
+import Home from './pages/home/Home';
+import AuthGuard from './guards/auth-guard';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<AuthGuard element={<Home />} />} />
+      <Route path="/register" element={<RegistrationForm />} />
+      <Route path="/login" element={<LoginForm />} />
+      {/* Add more routes here */}
+    </Routes>
+  );
 }
 
-export default App
+export default App;
